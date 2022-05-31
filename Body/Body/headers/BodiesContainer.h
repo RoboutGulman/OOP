@@ -1,5 +1,5 @@
 #pragma once
-#include "Body.h"
+#include "Bodies/Body.h"
 
 //выделить контроллер который отвечает за общение с пользователем
 //разделить ответственность BodiesContainer

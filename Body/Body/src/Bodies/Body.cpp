@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../../headers/stdafx.h"
 
-#include "Body.h"
+#include "../../headers/Bodies/Body.h"
 
 CBody::CBody(const std::string &type, double density) : m_density(density), m_type(type)
 {

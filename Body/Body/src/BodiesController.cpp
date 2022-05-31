@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../headers/stdafx.h"
 
-#include "BodiesController.h"
+#include "../headers/BodiesController.h"
 
 CBodiesController::CBodiesController(std::istream &input, std::ostream &output, CBodiesContainer &container)
     : m_input(input), m_output(output), m_container(container),

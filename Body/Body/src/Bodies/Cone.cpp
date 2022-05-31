@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../../headers/stdafx.h"
 
-#include "Cone.h"
+#include "../../headers/Bodies/Cone.h"
 
 CCone::CCone(double density, double baseRadius, double height)
     : CBody("Cone", density), m_baseRadius(baseRadius), m_height(height)

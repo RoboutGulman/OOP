@@ -148,27 +148,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BodiesContainer.cpp" />
-    <ClCompile Include="BodiesController.cpp" />
-    <ClCompile Include="Body.cpp" />
-    <ClCompile Include="Compound.cpp" />
-    <ClCompile Include="Cone.cpp" />
-    <ClCompile Include="Cylinder.cpp" />
-    <ClCompile Include="Parallelepiped.cpp" />
-    <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Template.cpp" />
+    <ClInclude Include="headers\BodiesContainer.h" />
+    <ClInclude Include="headers\BodiesController.h" />
+    <ClInclude Include="headers\Bodies\Body.h" />
+    <ClInclude Include="headers\Bodies\Compound.h" />
+    <ClInclude Include="headers\Bodies\Cone.h" />
+    <ClInclude Include="headers\Bodies\Cylinder.h" />
+    <ClInclude Include="headers\Bodies\Parallelepiped.h" />
+    <ClInclude Include="headers\Bodies\Sphere.h" />
+    <ClInclude Include="headers\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BodiesContainer.h" />
-    <ClInclude Include="BodiesController.h" />
-    <ClInclude Include="Body.h" />
-    <ClInclude Include="Compound.h" />
-    <ClInclude Include="Cone.h" />
-    <ClInclude Include="Cylinder.h" />
-    <ClInclude Include="Parallelepiped.h" />
-    <ClInclude Include="Sphere.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClCompile Include="src\BodiesContainer.cpp" />
+    <ClCompile Include="src\BodiesController.cpp" />
+    <ClCompile Include="src\Bodies\Body.cpp" />
+    <ClCompile Include="src\Bodies\Compound.cpp" />
+    <ClCompile Include="src\Bodies\Cone.cpp" />
+    <ClCompile Include="src\Bodies\Cylinder.cpp" />
+    <ClCompile Include="src\Bodies\Parallelepiped.cpp" />
+    <ClCompile Include="src\Bodies\Sphere.cpp" />
+    <ClCompile Include="src\stdafx.cpp" />
+    <ClCompile Include="src\Template.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

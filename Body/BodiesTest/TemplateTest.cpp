@@ -1,17 +1,17 @@
 // TemplateTest.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-#include "../Body/stdafx.h"
+#include "../Body/headers/stdafx.h"
 
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
-#include "../Body/BodiesContainer.h"
-#include "../Body/BodiesController.h"
-#include "../Body/Body.h"
-#include "../Body/Compound.h"
-#include "../Body/Cone.h"
-#include "../Body/Cylinder.h"
-#include "../Body/Parallelepiped.h"
-#include "../Body/Sphere.h"
+#include "../Body/headers/BodiesContainer.h"
+#include "../Body/headers/BodiesController.h"
+#include "../Body/headers/Bodies/Body.h"
+#include "../Body/headers/Bodies/Compound.h"
+#include "../Body/headers/Bodies/Cone.h"
+#include "../Body/headers/Bodies/Cylinder.h"
+#include "../Body/headers/Bodies/Parallelepiped.h"
+#include "../Body/headers/Bodies/Sphere.h"
 #include <math.h>
 
 SCENARIO("solid bodies")

@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../../headers/stdafx.h"
 
-#include "Parallelepiped.h"
+#include "../../headers/Bodies/Parallelepiped.h"
 
 CParallelepiped::CParallelepiped(double density, double width, double length, double height)
     : CBody("Parallelepiped", density), m_width(width), m_length(length), m_height(height)

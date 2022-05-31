@@ -18,51 +18,60 @@
     <ClCompile Include="TemplateTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\Body.cpp">
+    <ClCompile Include="..\Body\src\BodiesContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\Cone.cpp">
+    <ClCompile Include="..\Body\src\BodiesController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\Cylinder.cpp">
+    <ClCompile Include="..\Body\src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\Parallelepiped.cpp">
+    <ClCompile Include="..\Body\src\Bodies\Body.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\Sphere.cpp">
+    <ClCompile Include="..\Body\src\Bodies\Compound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\Compound.cpp">
+    <ClCompile Include="..\Body\src\Bodies\Cone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\BodiesContainer.cpp">
+    <ClCompile Include="..\Body\src\Bodies\Cylinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Body\BodiesController.cpp">
+    <ClCompile Include="..\Body\src\Bodies\Parallelepiped.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Body\src\Bodies\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Body\Cone.h">
+    <ClInclude Include="..\Body\headers\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Body\Cylinder.h">
+    <ClInclude Include="..\Body\headers\BodiesController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Body\Parallelepiped.h">
+    <ClInclude Include="..\Body\headers\BodiesContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Body\Sphere.h">
+    <ClInclude Include="..\Body\headers\Bodies\Body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Body\Body.h">
+    <ClInclude Include="..\Body\headers\Bodies\Compound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Body\BodiesContainer.h">
+    <ClInclude Include="..\Body\headers\Bodies\Cone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Body\BodiesController.h">
+    <ClInclude Include="..\Body\headers\Bodies\Cylinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Body\headers\Bodies\Parallelepiped.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Body\headers\Bodies\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

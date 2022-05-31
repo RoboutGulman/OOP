@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../../headers/stdafx.h"
 
-#include "Compound.h"
+#include "../../headers/Bodies/Compound.h"
 
 CCompound::CCompound(std::vector<std::shared_ptr<CBody>> bodies)
     : CBody("Compound", 0), m_bodies(bodies), m_volume(0), m_properties("\tComposite bodies:\n")

@@ -1,12 +1,12 @@
-#include "stdafx.h"
+#include "../headers/stdafx.h"
 
-#include "BodiesContainer.h"
-#include "Body.h"
-#include "Compound.h"
-#include "Cone.h"
-#include "Cylinder.h"
-#include "Parallelepiped.h"
-#include "Sphere.h"
+#include "../headers/Bodies/Body.h"
+#include "../headers/Bodies/Compound.h"
+#include "../headers/Bodies/Cone.h"
+#include "../headers/Bodies/Cylinder.h"
+#include "../headers/Bodies/Parallelepiped.h"
+#include "../headers/Bodies/Sphere.h"
+#include "../headers/BodiesContainer.h"
 
 void CBodiesContainer::AddCone(double density, double baseRadius, double heigth)
 {

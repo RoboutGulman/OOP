@@ -1,8 +1,8 @@
-#include "stdafx.h"
+#include "../headers/stdafx.h"
 
-#include "Parallelepiped.h"
-#include "Sphere.h"
-#include "BodiesContainer.h"
+#include "../headers/Bodies/Parallelepiped.h"
+#include "../headers/Bodies/Sphere.h"
+#include "../headers/BodiesContainer.h"
 
 int main()
 {

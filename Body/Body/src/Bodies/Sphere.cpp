@@ -1,6 +1,6 @@
-#include "stdafx.h"
+#include "../../headers/stdafx.h"
 
-#include "Sphere.h"
+#include "../../headers/Bodies/Sphere.h"
 
 CSphere::CSphere(double density, double radius) : CBody("Sphere", density), m_radius(radius)
 {

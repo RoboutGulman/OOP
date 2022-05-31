@@ -1,0 +1,8 @@
+1)тест на min_int (-2033535...)
+2)struct Args camelCase
+3)std exeprion (константная ссылка+родительский класс)
+4)убрать структуру A<Ch<Z
+5)string to int убрать ch
+6)Char to Int выполняет 2 ответственности
+7)Int to String(N) изменить название
+8)Number to Char один вызов 

@@ -154,7 +154,8 @@ bool CBodiesController::ReadCompoundBody()
     {
         bodiesNumber.emplace_back(bodyNumber - 1);
     }
-    return m_container.AddCompoundBody(bodiesNumber);
+    m_container.AddCompoundBody();
+    return true;
 }
 
 bool CBodiesController::PrintAllBodies(std::istream & /*args*/)

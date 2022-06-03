@@ -2,37 +2,62 @@
 
 #include "../../headers/Bodies/Compound.h"
 
-CCompound::CCompound(std::vector<std::shared_ptr<CBody>> bodies)
-    : CBody("Compound", 0), m_bodies(bodies), m_volume(0), m_properties("\tComposite bodies:\n")
+CCompound::CCompound() : CBody("Compound", 0)
 {
-    //сделать отложенную инициализация родителя, убрать метод SetDensity(посмотреть, можно ли)
-    double mass = 0;
-    int i = 1;
-    for (auto it = std::begin(m_bodies); it != std::end(m_bodies); ++it, i++)
-    {
-        mass += (*it)->GetMass();
-        m_volume += (*it)->GetVolume();
-        m_properties += "\t\t" + i + ')' + (*it)->ToString();
-    }
-    SetDensity(mass / m_volume);
 }
 
-/*bool CCompound::AddBody(std::shared_ptr<CBody> body)
+bool CCompound::AddBody(std::shared_ptr<CBody> body)
 {
-    if (std::addressof(dynamic_cast<CCompound&>(*body)) == this)
+    auto bodyPtr = std::dynamic_pointer_cast<CCompound>(body);
+    if (bodyPtr && std::addressof(*bodyPtr) == this)
     {
-        std::cout<<"it equal!!"<<std::endl;
+        return false;
     }
+    m_bodies.emplace_back(body);
+    return true;
+}
 
-}*/
-//если тело не может измениться, рассчитывать характеристики при инициаизации
+double CCompound::GetMass() const
+{
+    double mass = 0;
+    for (auto it = std::begin(m_bodies); it != std::end(m_bodies); ++it)
+    {
+        mass += (*it)->GetMass();
+    }
+    return mass;
+}
+
+double CCompound::GetDensity() const
+{
+    double mass = 0, volume = 0;
+    for (auto it = std::begin(m_bodies); it != std::end(m_bodies); ++it)
+    {
+        mass += (*it)->GetMass();
+        volume += (*it)->GetVolume();
+    }
+    if (fabs(volume) <= std::numeric_limits<double>::epsilon() * fabs(volume))
+    {
+        return volume;
+    }
+    return (mass / volume);
+}
+
 double CCompound::GetVolume() const
 {
-
-    return m_volume;
+    double volume = 0;
+    for (auto it = std::begin(m_bodies); it != std::end(m_bodies); ++it)
+    {
+        volume += (*it)->GetVolume();
+    }
+    return volume;
 }
 
 void CCompound::AppendProperties(std::ostream &strm) const
 {
-    strm << m_properties;
+    strm << "\tContained bodies:\n";
+    int i = 1;
+    for (auto it = std::begin(m_bodies); it != std::end(m_bodies); ++it, i++)
+    {
+        strm << "\t\t" + i + ')' + (*it)->ToString();
+    }
 }

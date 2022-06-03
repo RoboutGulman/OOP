@@ -7,9 +7,9 @@ class CBody
     void SetDensity(double density);
 
   public:
-    double GetDensity() const;
+    virtual double GetDensity() const;
     virtual double GetVolume() const = 0;
-    double GetMass() const;
+    virtual double GetMass() const;
     std::string ToString() const;
 
   private:

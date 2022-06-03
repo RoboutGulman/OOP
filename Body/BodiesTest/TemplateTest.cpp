@@ -4,14 +4,14 @@
 
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
-#include "../Body/headers/BodiesContainer.h"
-#include "../Body/headers/BodiesController.h"
 #include "../Body/headers/Bodies/Body.h"
 #include "../Body/headers/Bodies/Compound.h"
 #include "../Body/headers/Bodies/Cone.h"
 #include "../Body/headers/Bodies/Cylinder.h"
 #include "../Body/headers/Bodies/Parallelepiped.h"
 #include "../Body/headers/Bodies/Sphere.h"
+#include "../Body/headers/BodiesContainer.h"
+#include "../Body/headers/BodiesController.h"
 #include <math.h>
 
 SCENARIO("solid bodies")
@@ -82,11 +82,10 @@ SCENARIO("compound bodies")
     CCone cone(2, 3.23, 4);
     CParallelepiped parallelepiped(4.56, 10, 2, 3);
     CSphere sphere(4.56, 2);
-    std::vector<std::shared_ptr<CBody>> bodies;
-    bodies.emplace_back(std::move(std::shared_ptr<CSphere>(new CSphere{4.56, 2})));
-    bodies.emplace_back(std::move(std::shared_ptr<CParallelepiped>(new CParallelepiped{4.56, 10, 2, 3})));
-    bodies.emplace_back(std::move(std::shared_ptr<CCone>(new CCone{2, 3.23, 4})));
-    CCompound compound(bodies);
+    CCompound compound;
+    compound.AddBody(std::move(std::shared_ptr<CSphere>(new CSphere{4.56, 2})));
+    compound.AddBody(std::move(std::shared_ptr<CParallelepiped>(new CParallelepiped{4.56, 10, 2, 3})));
+    compound.AddBody(std::move(std::shared_ptr<CCone>(new CCone{2, 3.23, 4})));
     WHEN("we check density of compound body")
     {
         double compoundBodyDensity = compound.GetDensity();
@@ -120,11 +119,18 @@ SCENARIO("compound bodies")
     }
     WHEN("we create a compund body with a compound child body")
     {
-        std::vector<std::shared_ptr<CBody>> newBodies;
-        newBodies.emplace_back(std::move(std::shared_ptr<CCompound>(new CCompound{bodies})));
-        newBodies.emplace_back(std::move(std::shared_ptr<CCylinder>(new CCylinder{3, 3.23, 2})));
+        auto compoundPtr = std::shared_ptr<CCompound>(new CCompound{});
+        compoundPtr->AddBody(std::move(std::shared_ptr<CSphere>(new CSphere{4.56, 2})));
+        compoundPtr->AddBody(std::move(std::shared_ptr<CParallelepiped>(new CParallelepiped{4.56, 10, 2, 3})));
+        compoundPtr->AddBody(std::move(std::shared_ptr<CCone>(new CCone{2, 3.23, 4})));
+        CHECK(!compoundPtr->AddBody(compoundPtr));
+
         CCylinder cylinder(3, 3.23, 2);
-        CCompound bigCompound(newBodies);
+
+        CCompound bigCompound;
+        bigCompound.AddBody(std::move(compoundPtr));
+        bigCompound.AddBody(std::move(std::shared_ptr<CCylinder>(new CCylinder{3, 3.23, 2})));
+
         double compoundBodyVolume = bigCompound.GetVolume();
         double compoundBodyMass = bigCompound.GetMass();
         double compoundBodyDensity = bigCompound.GetDensity();
@@ -143,7 +149,7 @@ SCENARIO("compound bodies")
     }
 }
 
-SCENARIO("bodies Container")
+/*SCENARIO("bodies Container")
 {
     CBodiesContainer container;
     WHEN("we add bodies to container")
@@ -171,7 +177,9 @@ SCENARIO("bodies Container")
         container.AddCone(3, 4, 5);
         container.AddParallelepiped(7, 8, 9, 10);
         std::vector<int> numberOfBodies{0, 1};
-        container.AddCompoundBody(numberOfBodies);
+        container.AddCompoundBody();
+        container.AddBodyToCompoundBody(2, 1);
+        container.AddBodyToCompoundBody(2, 0);
         std::shared_ptr<CBody> compoundBodyPtr = container.GetAllBodies()[2];
 
         CCone cone(3, 4, 5);
@@ -354,3 +362,4 @@ SCENARIO("Bodies Controler test 2 (Find Minimum Weight In Water)")
         "weight in water is 0.00588 newtons of body:\nParallelepiped:\n\tdensity = 1000.0001\n\tvolume = 6\n\tmass = "
         "6000.0006\n\twidth = 1\n\tlength = 2\n\theight = 3\n> ");
 }
+*/

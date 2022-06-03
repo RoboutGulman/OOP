@@ -19,7 +19,9 @@ class CBodiesContainer
     void AddCylinder(double density, double baseRadius, double heigth);
     void AddParallelepiped(double density, double width, double length, double height);
     void AddSphere(double density, double radius);
-    bool AddCompoundBody(const std::vector<int> &bodyNumbers);
+
+    bool AddBodyToCompoundBody(int compoundBodyIdex, int compositeBodyIndex);
+    void AddCompoundBody();
 
     std::vector<std::shared_ptr<CBody>> GetAllBodies() const;
 

@@ -29,19 +29,24 @@ void CBodiesContainer::AddSphere(double density, double radius)
     m_bodies.emplace_back(std::move(std::shared_ptr<CSphere>(new CSphere{density, radius})));
 }
 
-bool CBodiesContainer::AddCompoundBody(const std::vector<int> &bodyNumbers)
+bool CBodiesContainer::AddBodyToCompoundBody(int compoundBodyIdex, int compositeBodyIndex)
 {
-    std::vector<std::shared_ptr<CBody>> bodies;
-    for (int bodyNumber : bodyNumbers)
+    if (m_bodies.empty() || compoundBodyIdex < 0 || compositeBodyIndex < 0 || compoundBodyIdex > m_bodies.size() ||
+        compositeBodyIndex > m_bodies.size())
     {
-        if (m_bodies.empty() || bodyNumber < 0 || bodyNumber > m_bodies.size())
-        {
-            return false;
-        }
-        bodies.emplace_back(m_bodies[bodyNumber]);
+        return false;
     }
-    m_bodies.emplace_back(std::move(std::shared_ptr<CCompound>(new CCompound{bodies})));
-    return true;
+    auto compoundBodyPtr = std::dynamic_pointer_cast<CCompound>(m_bodies[compoundBodyIdex]);
+    if (compoundBodyPtr)
+    {
+        return compoundBodyPtr->AddBody(m_bodies[compositeBodyIndex]);
+    }
+    return false;
+}
+
+void CBodiesContainer::AddCompoundBody()
+{
+    m_bodies.emplace_back(std::move(std::shared_ptr<CCompound>(new CCompound{})));
 }
 
 std::vector<std::shared_ptr<CBody>> CBodiesContainer::GetAllBodies() const

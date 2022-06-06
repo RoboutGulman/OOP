@@ -12,4 +12,5 @@ int main()
    CBodiesController remoteControl(std::cin, std::cout, container);
 
     remoteControl.HandleCommands(); 
+    return 0;
 }

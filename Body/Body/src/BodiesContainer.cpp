@@ -36,11 +36,13 @@ bool CBodiesContainer::AddBodyToCompoundBody(int compoundBodyIdex, int composite
     {
         return false;
     }
+
     auto compoundBodyPtr = std::dynamic_pointer_cast<CCompound>(m_bodies[compoundBodyIdex]);
     if (compoundBodyPtr)
     {
         return compoundBodyPtr->AddBody(m_bodies[compositeBodyIndex]);
     }
+
     return false;
 }
 

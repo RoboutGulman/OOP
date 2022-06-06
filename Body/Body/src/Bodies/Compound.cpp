@@ -8,6 +8,8 @@ CCompound::CCompound() : CBody("Compound", 0)
 
 bool CCompound::AddBody(std::shared_ptr<CBody> body)
 {
+    //запретить прямое или косвенное включение объекта в самого себя
+  
     auto bodyPtr = std::dynamic_pointer_cast<CCompound>(body);
     if (bodyPtr && std::addressof(*bodyPtr) == this)
     {
@@ -35,7 +37,7 @@ double CCompound::GetDensity() const
         mass += (*it)->GetMass();
         volume += (*it)->GetVolume();
     }
-    if (fabs(volume) <= std::numeric_limits<double>::epsilon() * fabs(volume))
+    if (fabs(volume) <= std::numeric_limits<double>::epsilon())
     {
         return volume;
     }

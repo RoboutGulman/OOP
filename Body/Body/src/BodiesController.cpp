@@ -63,11 +63,13 @@ bool CBodiesController::ReadBody(std::istream &args)
 {
     std::string typeName;
     args >> typeName;
+
     auto typeIter = m_bodyTypeNames.find(typeName);
     if (typeIter == m_bodyTypeNames.end())
     {
         return false;
     }
+
     switch (typeIter->second)
     {
     case BodyType::Cone:
@@ -96,6 +98,7 @@ bool CBodiesController::ReadCone()
 {
     double density, baseRadius, heigth;
     m_output << "enter a density, base radius and heigth: ";
+
     if (m_input >> density >> baseRadius >> heigth)
     {
         m_container.AddCone(density, baseRadius, heigth);
@@ -108,7 +111,7 @@ bool CBodiesController::ReadCylinder()
 {
     double density, baseRadius, heigth;
     m_output << "enter a density, base radius and heigth: ";
-    //сделать ограничение на отрицательную плотность и т.д.
+
     if (m_input >> density >> baseRadius >> heigth)
     {
         m_container.AddCylinder(density, baseRadius, heigth);
@@ -121,6 +124,7 @@ bool CBodiesController::ReadParallelepiped()
 {
     double density, width, length, height;
     m_output << "enter a density, width, length and height: ";
+
     if (m_input >> density >> width >> length >> height)
     {
         m_container.AddParallelepiped(density, width, length, height);
@@ -133,6 +137,7 @@ bool CBodiesController::ReadSphere()
 {
     double density, radius;
     m_output << "enter a density and radius: ";
+
     if (m_input >> density >> radius)
     {
         m_container.AddSphere(density, radius);
@@ -193,6 +198,9 @@ bool CBodiesController::FindMinWeightInWater(std::istream & /*args*/)
 bool CBodiesController::AddBodyToCompoundBody(std::istream &args)
 {
     int compoundBodyIndex, compositeBodyIndex;
-    args >> compoundBodyIndex >> compositeBodyIndex;
-    return m_container.AddBodyToCompoundBody(compoundBodyIndex - 1, compositeBodyIndex - 1);
+    if (args >> compoundBodyIndex >> compositeBodyIndex)
+    {
+        return m_container.AddBodyToCompoundBody(compoundBodyIndex - 1, compositeBodyIndex - 1);
+    }
+    return false;
 }

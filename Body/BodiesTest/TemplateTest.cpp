@@ -79,6 +79,17 @@ SCENARIO("solid bodies")
 //ограничить помещние составного тела в себя само
 SCENARIO("compound bodies")
 {
+    WHEN("we check values for empty compound body")
+    {
+        CCompound compound;
+        THEN("it dysplays 0")
+        {
+            CHECK(fabs(compound.GetDensity()) <= std::numeric_limits<double>::epsilon());
+            CHECK(fabs(compound.GetMass()) <= std::numeric_limits<double>::epsilon());
+            CHECK(fabs(compound.GetVolume()) <= std::numeric_limits<double>::epsilon());
+        }
+    }
+
     CCone cone(2, 3.23, 4);
     CParallelepiped parallelepiped(4.56, 10, 2, 3);
     CSphere sphere(4.56, 2);
@@ -180,10 +191,11 @@ SCENARIO("bodies Container")
     {
         container.AddCone(3, 4, 5);
         container.AddParallelepiped(7, 8, 9, 10);
-        std::vector<int> numberOfBodies{0, 1};
+
         container.AddCompoundBody();
         container.AddBodyToCompoundBody(2, 1);
         container.AddBodyToCompoundBody(2, 0);
+
         std::shared_ptr<CBody> compoundBodyPtr = container.GetAllBodies()[2];
 
         CCone cone(3, 4, 5);
@@ -296,7 +308,7 @@ SCENARIO("Find Minimum Weight In Water Function")
     CBodiesContainer container;
     WHEN("there are no bodies in container")
     {
-        THEN("it returns null")
+        THEN("it returns false")
         {
             CHECK(!container.FindMinWeightInWater());
         }

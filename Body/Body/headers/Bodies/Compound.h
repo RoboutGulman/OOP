@@ -5,9 +5,11 @@ class CCompound final : public CBody
 {
   public:
     CCompound();
+
     double GetVolume() const override;
     double GetMass() const override;
     double GetDensity() const override;
+
     bool AddBody(std::shared_ptr<CBody> body);
 
   private:

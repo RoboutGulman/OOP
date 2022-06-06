@@ -82,13 +82,15 @@ SCENARIO("compound bodies")
     CCone cone(2, 3.23, 4);
     CParallelepiped parallelepiped(4.56, 10, 2, 3);
     CSphere sphere(4.56, 2);
-    CCompound compound;
-    compound.AddBody(std::move(std::shared_ptr<CSphere>(new CSphere{4.56, 2})));
-    compound.AddBody(std::move(std::shared_ptr<CParallelepiped>(new CParallelepiped{4.56, 10, 2, 3})));
-    compound.AddBody(std::move(std::shared_ptr<CCone>(new CCone{2, 3.23, 4})));
+
+    auto compoundPtr = std::shared_ptr<CCompound>(new CCompound{});
+    compoundPtr->AddBody(std::move(std::shared_ptr<CSphere>(new CSphere{4.56, 2})));
+    compoundPtr->AddBody(std::move(std::shared_ptr<CParallelepiped>(new CParallelepiped{4.56, 10, 2, 3})));
+    compoundPtr->AddBody(std::move(std::shared_ptr<CCone>(new CCone{2, 3.23, 4})));
+
     WHEN("we check density of compound body")
     {
-        double compoundBodyDensity = compound.GetDensity();
+        double compoundBodyDensity = compoundPtr->GetDensity();
         double bodiesMassesToVolumes = (cone.GetMass() + parallelepiped.GetMass() + sphere.GetMass()) /
                                        (cone.GetVolume() + parallelepiped.GetVolume() + sphere.GetVolume());
         THEN("it's density is equal to the ratio of the masses of the constituent bodies to their volumes")
@@ -99,7 +101,7 @@ SCENARIO("compound bodies")
     }
     WHEN("we check mass of compound body")
     {
-        double compoundBodyMass = compound.GetMass();
+        double compoundBodyMass = compoundPtr->GetMass();
         double sumOfMasses = (cone.GetMass() + parallelepiped.GetMass() + sphere.GetMass());
         THEN("it's mass is equal to the sum of masses of the constituent bodies ")
         {
@@ -109,7 +111,7 @@ SCENARIO("compound bodies")
     }
     WHEN("we check volume of compound body")
     {
-        double compoundBodyVolume = compound.GetVolume();
+        double compoundBodyVolume = compoundPtr->GetVolume();
         double sumOfVolumes = (cone.GetVolume() + parallelepiped.GetVolume() + sphere.GetVolume());
         THEN("it's volume is equal to the sum of volumes of the constituent bodies ")
         {
@@ -119,23 +121,18 @@ SCENARIO("compound bodies")
     }
     WHEN("we create a compund body with a compound child body")
     {
-        auto compoundPtr = std::shared_ptr<CCompound>(new CCompound{});
-        compoundPtr->AddBody(std::move(std::shared_ptr<CSphere>(new CSphere{4.56, 2})));
-        compoundPtr->AddBody(std::move(std::shared_ptr<CParallelepiped>(new CParallelepiped{4.56, 10, 2, 3})));
-        compoundPtr->AddBody(std::move(std::shared_ptr<CCone>(new CCone{2, 3.23, 4})));
-        CHECK(!compoundPtr->AddBody(compoundPtr));
-
         CCylinder cylinder(3, 3.23, 2);
+        double sumOfVolumes = (cylinder.GetVolume() + compoundPtr->GetVolume());
+        double sumOfMasses = (cylinder.GetMass() + compoundPtr->GetMass());
 
         CCompound bigCompound;
-        bigCompound.AddBody(std::move(compoundPtr));
+        bigCompound.AddBody(compoundPtr);
         bigCompound.AddBody(std::move(std::shared_ptr<CCylinder>(new CCylinder{3, 3.23, 2})));
 
         double compoundBodyVolume = bigCompound.GetVolume();
         double compoundBodyMass = bigCompound.GetMass();
         double compoundBodyDensity = bigCompound.GetDensity();
-        double sumOfVolumes = (cylinder.GetVolume() + compound.GetVolume());
-        double sumOfMasses = (cylinder.GetMass() + compound.GetMass());
+
         double bodiesMassesToVolumes = sumOfMasses / sumOfVolumes;
         THEN("it's volume is equal to the sum of volumes of the constituent bodies ")
         {
@@ -147,9 +144,16 @@ SCENARIO("compound bodies")
                   std::numeric_limits<double>::epsilon() * fabs(compoundBodyDensity + bodiesMassesToVolumes));
         }
     }
+    WHEN("we try to add compound body to itself")
+    {
+        THEN("it drops error")
+        {
+            CHECK(!compoundPtr->AddBody(compoundPtr));
+        }
+    }
 }
 
-/*SCENARIO("bodies Container")
+SCENARIO("bodies Container")
 {
     CBodiesContainer container;
     WHEN("we add bodies to container")
@@ -192,21 +196,23 @@ SCENARIO("compound bodies")
     }
     WHEN("we try to add compound body to empty container")
     {
-        std::vector<int> numberOfBodies{0, 1};
+        container.AddCompoundBody();
 
         THEN("container drops error and not add compound body ")
         {
-            CHECK(!container.AddCompoundBody(numberOfBodies));
+            CHECK(!container.AddBodyToCompoundBody(0, 1));
         }
     }
     WHEN("we try to add compound body with incorrect numbers")
     {
         container.AddCone(3, 4, 5);
-        std::vector<int> numberOfBodies{-5, 5};
+        container.AddCompoundBody();
 
         THEN("container drops error and not add compound body")
         {
-            CHECK(!container.AddCompoundBody(numberOfBodies));
+            CHECK(!container.AddBodyToCompoundBody(1, -5));
+            CHECK(!container.AddBodyToCompoundBody(1, 3));
+            CHECK(!container.AddBodyToCompoundBody(0, 1));
         }
     }
 }
@@ -268,8 +274,11 @@ SCENARIO("Find Maximum Weight Function")
     {
         container.AddCone(3, 4, 5);
         container.AddParallelepiped(7, 8, 9, 10);
-        std::vector<int> numberOfBodies{0, 1};
-        container.AddCompoundBody(numberOfBodies);
+
+        container.AddCompoundBody();
+        container.AddBodyToCompoundBody(2, 0);
+        container.AddBodyToCompoundBody(2, 1);
+
         auto result = container.FindMaxWeight();
 
         CCone cone(3, 4, 5);
@@ -362,4 +371,3 @@ SCENARIO("Bodies Controler test 2 (Find Minimum Weight In Water)")
         "weight in water is 0.00588 newtons of body:\nParallelepiped:\n\tdensity = 1000.0001\n\tvolume = 6\n\tmass = "
         "6000.0006\n\twidth = 1\n\tlength = 2\n\theight = 3\n> ");
 }
-*/

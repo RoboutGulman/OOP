@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <map>
 #define _USE_MATH_DEFINES
 #include <math.h>

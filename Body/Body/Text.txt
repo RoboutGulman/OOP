@@ -1,0 +1,27 @@
+/*SCENARIO("Bodies Controler test 3 (CompoundBoies)")
+{
+    std::string input = "newBody Compound\nnewBody Cylinder\n1 2 3\nnewBody Parallelepiped\n4 5 6.5 4.6\naddTo 1 "
+                        "2\naddTo 1 3\nprintAll\nExit\n";
+
+    std::istringstream strmIn(input);
+    std::ostringstream strmOut;
+    CBodiesContainer container;
+    CBodiesController remoteControl(strmIn, strmOut, container);
+
+    remoteControl.HandleCommands();
+
+    std::string s = strmOut.str();
+    std::cout << s << std::endl;
+    REQUIRE(
+        s ==
+        "> > enter a density, base radius and heigth: > enter a density, width, length and height: > > > "
+        "1)Compound:\n\t"
+        "density = 3.3958447\n\tvolume = 187.1991118\n\tmass = 635.6991118\n\tContained "
+        "bodies:\n\t\t1)Cylinder:\n\tdensity = "
+        "1\n\tvolume = 37.69911184\n\tmass = 37.69911184\n\tbase radius = 2\n\theight = "
+        "3\n\t\t2)Parallelepiped:\n\tdensity = "
+        "4\n\tvolume = 149.5\n\tmass = 598\n\twidth = 5\n\tlength = 6.5\n\theight = 4.6\n2)Cylinder\n\tdensity = "
+        "1\n\tvolume = 37.69911184\n\tmass = 37.69911184\n\tbase radius = 2\n\theight = 3\n3)Parallelepiped\n\tdensity "
+        "= "
+        "4\n\tvolume = 149.5\n\tmass = 598\n\twidth = 5\n\tlength = 6.5\n\theight = 4.6\n> ");
+}*/

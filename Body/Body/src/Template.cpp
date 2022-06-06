@@ -1,12 +1,15 @@
-#include "../headers/stdafx.h"
+#include "../stdafx.h"
 
 #include "../headers/Bodies/Parallelepiped.h"
 #include "../headers/Bodies/Sphere.h"
 #include "../headers/BodiesContainer.h"
+#include "../headers/BodiesController.h"
 
 int main()
 {
-   /*CBodiesContainer remoteControl(std::cin, std::cout);
+   
+   CBodiesContainer container;
+   CBodiesController remoteControl(std::cin, std::cout, container);
 
-    remoteControl.HandleCommands(); */
+    remoteControl.HandleCommands(); 
 }

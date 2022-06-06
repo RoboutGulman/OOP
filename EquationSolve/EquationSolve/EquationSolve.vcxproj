@@ -144,11 +144,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Solve3.cpp" />
+    <ClCompile Include="SolveEquation.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Template.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solve3.h" />
+    <ClInclude Include="SolveEquation.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

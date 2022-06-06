@@ -40,17 +40,17 @@ EquationRoots3 SolveUsingHyperbolicFunctions(double r, double b, double q)
 
     double r2 = pow(r, 2);
     double q3 = pow(q, 3);
-    double A = -pow(fabs(r) + sqrt(r2 - q3), 1. / 3);
+    double a = -pow(fabs(r) + sqrt(r2 - q3), 1. / 3);
     if (r < 0)
     {
-        A = -A;
+        a = -a;
     }
-    double B = A == 0 ? 0 : B = q / A;
+    double B = a == 0 ? 0 : B = q / a;
 
     b /= 3;
-    result.roots[0] = (A + B) - b;
-    result.roots[1] = -0.5 * (A + B) - b;
-    result.roots[2] = 0.5 * sqrt(3.) * (A - B);
+    result.roots[0] = (a + B) - b;
+    result.roots[1] = -0.5 * (a + B) - b;
+    result.roots[2] = 0.5 * sqrt(3.) * (a - B);
     if (fabs(result.roots[2]) < std::numeric_limits<double>::epsilon())
     {
         result.roots[2] = result.roots[1];
@@ -63,7 +63,11 @@ EquationRoots3 SolveUsingHyperbolicFunctions(double r, double b, double q)
 
 EquationRoots3 Solve3(double a, double b, double c, double d)
 {
-
+    if ((fabs(a) <= std::numeric_limits<double>::epsilon() * fabs(a)))
+    {
+        throw std::invalid_argument("the coefficient at x cannot be equal to 0");
+    }
+    
     ReducePolynomial(a, b, c, d);
     double q = (pow(b, 2) - 3 * c) / 9;
     double r = (b * (2 * pow(b, 2) - 9 * c) + 27 * d) / 54;

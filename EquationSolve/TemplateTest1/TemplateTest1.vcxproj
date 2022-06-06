@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{63fc55b4-73f4-4af9-a1e8-632f00c717ea}</ProjectGuid>
-    <RootNamespace>Body</RootNamespace>
+    <ProjectGuid>{fc18beba-18e5-45e8-9118-5df92dc6f80e}</ProjectGuid>
+    <RootNamespace>TemplateTest1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Bodies</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -89,13 +88,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(TargetPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -105,8 +105,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,6 +112,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(TargetPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -121,13 +122,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(TargetPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -137,8 +139,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,32 +146,20 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"$(TargetPath)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="headers\BodiesContainer.h" />
-    <ClInclude Include="headers\BodiesController.h" />
-    <ClInclude Include="headers\Bodies\Body.h" />
-    <ClInclude Include="headers\Bodies\Compound.h" />
-    <ClInclude Include="headers\Bodies\Cone.h" />
-    <ClInclude Include="headers\Bodies\Cylinder.h" />
-    <ClInclude Include="headers\Bodies\Parallelepiped.h" />
-    <ClInclude Include="headers\Bodies\Sphere.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClCompile Include="..\EquationSolve\Solve3.cpp" />
+    <ClCompile Include="..\EquationSolve\SolveEquation.cpp" />
+    <ClCompile Include="..\EquationSolve\stdafx.cpp" />
+    <ClCompile Include="TemplateTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\BodiesContainer.cpp" />
-    <ClCompile Include="src\BodiesController.cpp" />
-    <ClCompile Include="src\Bodies\Body.cpp" />
-    <ClCompile Include="src\Bodies\Compound.cpp" />
-    <ClCompile Include="src\Bodies\Cone.cpp" />
-    <ClCompile Include="src\Bodies\Cylinder.cpp" />
-    <ClCompile Include="src\Bodies\Parallelepiped.cpp" />
-    <ClCompile Include="src\Bodies\Sphere.cpp" />
-    <ClCompile Include="src\Template.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Text.txt" />
+    <ClInclude Include="..\EquationSolve\Solve3.h" />
+    <ClInclude Include="..\EquationSolve\SolveEquation.h" />
+    <ClInclude Include="..\EquationSolve\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

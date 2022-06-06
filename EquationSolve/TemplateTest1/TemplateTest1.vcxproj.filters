@@ -15,27 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Template.cpp">
+    <ClCompile Include="TemplateTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="..\EquationSolve\Solve3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Solve3.cpp">
+    <ClCompile Include="..\EquationSolve\SolveEquation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SolveEquation.cpp">
+    <ClCompile Include="..\EquationSolve\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="..\EquationSolve\Solve3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Solve3.h">
+    <ClInclude Include="..\EquationSolve\SolveEquation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SolveEquation.h">
+    <ClInclude Include="..\EquationSolve\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

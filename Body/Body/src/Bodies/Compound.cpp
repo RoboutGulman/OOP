@@ -1,4 +1,4 @@
-#include "../../headers/stdafx.h"
+#include "../../stdafx.h"
 
 #include "../../headers/Bodies/Compound.h"
 
@@ -58,6 +58,6 @@ void CCompound::AppendProperties(std::ostream &strm) const
     int i = 1;
     for (auto it = std::begin(m_bodies); it != std::end(m_bodies); ++it, i++)
     {
-        strm << "\t\t" + i + ')' + (*it)->ToString();
+        strm << "\t\t" << i << ')' << (*it)->ToString();
     }
 }

@@ -1,4 +1,4 @@
-#include "../headers/stdafx.h"
+#include "../stdafx.h"
 
 #include "../headers/Bodies/Body.h"
 #include "../headers/Bodies/Compound.h"
@@ -31,8 +31,8 @@ void CBodiesContainer::AddSphere(double density, double radius)
 
 bool CBodiesContainer::AddBodyToCompoundBody(int compoundBodyIdex, int compositeBodyIndex)
 {
-    if (m_bodies.empty() || compoundBodyIdex < 0 || compositeBodyIndex < 0 || compoundBodyIdex > m_bodies.size() ||
-        compositeBodyIndex > m_bodies.size())
+    if (m_bodies.empty() || compoundBodyIdex < 0 || compositeBodyIndex < 0 || compoundBodyIdex >= m_bodies.size() ||
+        compositeBodyIndex >= m_bodies.size())
     {
         return false;
     }

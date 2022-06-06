@@ -1,4 +1,4 @@
-#include "../headers/stdafx.h"
+#include "../stdafx.h"
 
 #include "../headers/BodiesController.h"
 
@@ -7,6 +7,7 @@ CBodiesController::CBodiesController(std::istream &input, std::ostream &output, 
       m_actionMap({{"newBody", [this](std::istream &strm) { return ReadBody(strm); }},
                    {"findMaxWeight", [this](std::istream &strm) { return FindMaxWeight(strm); }},
                    {"printAll", [this](std::istream &strm) { return PrintAllBodies(strm); }},
+                   {"addTo", [this](std::istream &strm) { return AddBodyToCompoundBody(strm); }},
                    {"findMinWaterWeight", [this](std::istream &strm) { return FindMinWeightInWater(strm); }}})
 {
 }
@@ -143,17 +144,6 @@ bool CBodiesController::ReadSphere()
 //тест некорректного ввода
 bool CBodiesController::ReadCompoundBody()
 {
-    std::vector<int> bodiesNumber;
-    m_output << "enter the numbers of the bodies already described ";
-    std::string commandLine;
-    getline(m_input, commandLine);
-    std::istringstream strm(commandLine);
-
-    int bodyNumber;
-    while (strm >> bodyNumber)
-    {
-        bodiesNumber.emplace_back(bodyNumber - 1);
-    }
     m_container.AddCompoundBody();
     return true;
 }
@@ -197,4 +187,12 @@ bool CBodiesController::FindMinWeightInWater(std::istream & /*args*/)
         return false;
     }
     m_output << "min weight in water is " << result->weight << " newtons of body:\n" << (result->body)->ToString();
+    return true;
+}
+
+bool CBodiesController::AddBodyToCompoundBody(std::istream &args)
+{
+    int compoundBodyIndex, compositeBodyIndex;
+    args >> compoundBodyIndex >> compositeBodyIndex;
+    return m_container.AddBodyToCompoundBody(compoundBodyIndex - 1, compositeBodyIndex - 1);
 }

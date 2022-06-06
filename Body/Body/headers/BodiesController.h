@@ -30,6 +30,8 @@ class CBodiesController
     bool FindMaxWeight(std::istream &args);
     bool FindMinWeightInWater(std::istream &args);
 
+    bool AddBodyToCompoundBody(std::istream& args);
+
     bool PrintAllBodies(std::istream &args);
 
     CBodiesContainer &m_container;

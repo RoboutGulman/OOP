@@ -162,6 +162,19 @@ SCENARIO("compound bodies")
             CHECK(!compoundPtr->AddBody(compoundPtr));
         }
     }
+    WHEN("we try to add compound body to itself indirectly")
+    {
+        auto a = std::shared_ptr<CCompound>(new CCompound{});
+        auto b = std::shared_ptr<CCompound>(new CCompound{});
+        auto c = std::shared_ptr<CCompound>(new CCompound{});
+        CHECK(a->AddBody(b));
+        CHECK(b->AddBody(c));
+        THEN("it drops error")
+        {
+            CHECK(!b->AddBody(a));
+            CHECK(!c->AddBody(a));
+        }
+    }
 }
 
 SCENARIO("bodies Container")

@@ -6,6 +6,7 @@ class CCompound final : public CBody
   public:
     CCompound();
 
+    bool IsContains(CCompound* containedBody) const;
     double GetVolume() const override;
     double GetMass() const override;
     double GetDensity() const override;

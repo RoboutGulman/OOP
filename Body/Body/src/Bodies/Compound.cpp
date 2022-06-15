@@ -9,12 +9,13 @@ CCompound::CCompound() : CBody("Compound", 0)
 bool CCompound::AddBody(std::shared_ptr<CBody> body)
 {
     //запретить прямое или косвенное включение объекта в самого себя
-  
+
     auto bodyPtr = std::dynamic_pointer_cast<CCompound>(body);
-    if (bodyPtr && std::addressof(*bodyPtr) == this)
+    if (bodyPtr && (std::addressof(*bodyPtr) == this || bodyPtr->IsContains(this)))
     {
         return false;
     }
+
     m_bodies.emplace_back(body);
     return true;
 }
@@ -42,6 +43,25 @@ double CCompound::GetDensity() const
         return volume;
     }
     return (mass / volume);
+}
+
+bool CCompound::IsContains(CCompound* containedBody) const
+{
+    if (std::addressof(*containedBody) == this)
+    {
+        return true;
+    }
+    for (std::shared_ptr<CBody> body : m_bodies)
+    {
+        auto bodyPtr = std::dynamic_pointer_cast<CCompound>(body);
+        if (bodyPtr &&
+            (std::addressof(*bodyPtr) == std::addressof(*containedBody) || bodyPtr->IsContains(containedBody)))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 double CCompound::GetVolume() const

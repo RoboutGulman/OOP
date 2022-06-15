@@ -21,12 +21,19 @@ EquationRoots3 SolveUsingTrigonometricFunctions(double r, double b, double q)
     double q3 = pow(q, 3);
     double t = r / sqrt(q3);
     if (t < -1)
+    {
         t = -1;
+    }
+
     if (t > 1)
+    {
         t = 1;
+    }
+
     t = acos(t);
     b /= 3;
     q = -2 * sqrt(q);
+    //вынести расчёт в отдельную функцию
     result.roots[0] = q * cos(t / 3) - b;
     result.roots[1] = q * cos((t + 2 * M_PI) / 3) - b;
     result.roots[2] = q * cos((t - 2 * M_PI) / 3) - b;
@@ -67,7 +74,7 @@ EquationRoots3 Solve3(double a, double b, double c, double d)
     {
         throw std::invalid_argument("the coefficient at x cannot be equal to 0");
     }
-    
+
     ReducePolynomial(a, b, c, d);
     double q = (pow(b, 2) - 3 * c) / 9;
     double r = (b * (2 * pow(b, 2) - 9 * c) + 27 * d) / 54;

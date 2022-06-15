@@ -59,6 +59,7 @@ SCENARIO("Case with real coefficient")
 
 SCENARIO("zero coefficient")
 {
+    //Require trought(для того, чтобы ловить exeption)
     WHEN("zero coefficient on x^3")
     {
         bool isFailed = false;
@@ -78,7 +79,7 @@ SCENARIO("zero coefficient")
     WHEN("zero coefficient on x^2 and x")
     {
         bool isFailed = false;
-        // x^2+8=0
+        // x^3+8=0
         auto result = Solve3(1, 0, 0, 8);
 
         THEN("program works correctly")

@@ -147,12 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CStackOverflowError.cpp" />
     <ClCompile Include="CStackUnderflowError.cpp" />
     <ClCompile Include="CStringStack.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Template.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CStackOverflowError.h" />
     <ClInclude Include="CStackUnderflowError.h" />
     <ClInclude Include="CStringStack.h" />
     <ClInclude Include="stdafx.h" />

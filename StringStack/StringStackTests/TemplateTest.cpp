@@ -7,7 +7,6 @@
 #include "../../../catch/catch.hpp"
 #include "../StringStack/CStackUnderflowError.h"
 #include "../StringStack/CStringStack.h"
-#include "../StringStack/stdafx.h"
 
 SCENARIO("Creating stack")
 {
@@ -231,14 +230,6 @@ SCENARIO("empty check")
                 CHECK(!stack.Empty());
             }
         }
-        WHEN("we try to watck top of empty stack")
-        {
-            REQUIRE_THROWS_AS(stack.Top(), CStackUnderflowError);
-            THEN("stack still empty")
-            {
-                CHECK(stack.Empty());
-            }
-        }
     }
 }
 
@@ -407,7 +398,7 @@ SCENARIO("Clear Stack")
     }
 }
 
-SCENARIO("equalization operator")
+SCENARIO("copying equalization operator")
 {
     std::string value1 = "string";
     std::string value2 = "string test";
@@ -461,3 +452,78 @@ SCENARIO("equalization operator")
         }
     }
 }
+
+SCENARIO("moving equalization operator")
+{
+    std::string value1 = "string";
+    std::string value2 = "string test";
+    std::string value3 = "test string for stack";
+    GIVEN("empty stack and stack with 1 value")
+    {
+        CStringStack recieverStack;
+        CStringStack giverStack;
+        giverStack.Push(value1);
+        WHEN("we equate an empty stack to a non-empty one")
+        {
+            recieverStack = std::move(giverStack);
+            THEN("reciever stack become copy of giver")
+            {
+                CHECK(!recieverStack.Empty());
+                CHECK(recieverStack.Size() == 1);
+                CHECK(recieverStack.Top() == value1);
+            }
+            THEN("giver stack now empty")
+            {
+                CHECK(giverStack.Empty());
+                CHECK(giverStack.Size() == 0);
+            }
+        }
+        WHEN("we equate an empty stack to a non-empty one and then change any of them")
+        {
+            recieverStack = std::move(giverStack);
+            recieverStack.Push(value2);
+            THEN("the reciever stack changed")
+            {
+                CHECK(!recieverStack.Empty());
+                CHECK(recieverStack.Size() == 2);
+                CHECK(recieverStack.Top() == value2);
+            }
+            THEN("giver stack now empty")
+            {
+                CHECK(giverStack.Empty());
+                CHECK(giverStack.Size() == 0);
+            }
+        }
+        WHEN("we equate an non-empty stack to a empty one")
+        {
+            giverStack = std::move(recieverStack);
+            THEN("both stacks is empty")
+            {
+                CHECK(giverStack.Empty());
+                CHECK(recieverStack.Empty());
+            }
+        }
+    }
+}
+
+/*SCENARIO("a lot of values check")
+{
+    std::string value1 = "string";
+    std::string value2 = "string test";
+    GIVEN("empty stack")
+    {
+        CStringStack stack;
+        WHEN("we add the size_t - 1 elements")
+        {
+            
+            for (size_t i = 1; i <= (size_t) - 2; i++)
+            {
+                stack.Push(value1);
+            }
+            THEN("it correctly")
+            {
+                CHECK(!stack.Empty());
+            }
+        }
+    }
+}*/

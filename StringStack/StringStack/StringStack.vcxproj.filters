@@ -27,6 +27,9 @@
     <ClCompile Include="CStackUnderflowError.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CStackOverflowError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CStackUnderflowError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CStackOverflowError.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

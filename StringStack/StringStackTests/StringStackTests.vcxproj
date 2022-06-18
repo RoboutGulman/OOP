@@ -155,11 +155,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\StringStack\CStackOverflowError.cpp" />
     <ClCompile Include="..\StringStack\CStackUnderflowError.cpp" />
     <ClCompile Include="..\StringStack\CStringStack.cpp" />
     <ClCompile Include="TemplateTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\StringStack\CStackOverflowError.h" />
     <ClInclude Include="..\StringStack\CStackUnderflowError.h" />
     <ClInclude Include="..\StringStack\CStringStack.h" />
   </ItemGroup>

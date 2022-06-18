@@ -5,5 +5,5 @@ class CStackUnderflowError : public std::runtime_error
     CStackUnderflowError();
 
   private:
-      inline static const std::string MESSAGE = "stack is empty";
+    inline static const std::string MESSAGE = "stack is empty";
 };

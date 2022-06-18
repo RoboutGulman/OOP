@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include "CStackOverflowError.h"
 #include "CStackUnderflowError.h"
 #include "CStringStack.h"
 
@@ -18,6 +19,7 @@ CStringStack::CStringStack(CStringStack const &other)
 
     while (currentOtherNode)
     {
+        //если будет выброшено исключение, начнётся рекурсивное удаление указателей и не хватит глубины стека
         currentMyNode->next = std::make_shared<Item>(currentOtherNode->value);
         currentMyNode = currentMyNode->next;
         currentOtherNode = currentOtherNode->next;
@@ -25,8 +27,7 @@ CStringStack::CStringStack(CStringStack const &other)
     m_size = other.Size();
 }
 
-CStringStack::CStringStack(CStringStack &&other) noexcept
-    : m_top(other.m_top), m_size(other.m_size)
+CStringStack::CStringStack(CStringStack &&other) noexcept : m_top(other.m_top), m_size(other.m_size)
 {
     other.m_top = nullptr;
     other.m_size = 0;
@@ -63,16 +64,32 @@ CStringStack &CStringStack::operator=(CStringStack &&other) noexcept
 
 void CStringStack::Push(const std::string &str)
 {
+    size_t newSize = m_size + 1;
+
+    //overflow size_t condition
+    if (newSize < m_size)
+    {
+        throw CStackOverflowError();
+    }
+
     auto newNode = std::make_shared<Item>(str, m_top);
     m_top = newNode;
-    ++m_size;
+    m_size = newSize;
 }
 
 void CStringStack::Push(std::string &&str)
 {
+    size_t newSize = m_size + 1;
+
+    //overflow size_t condition
+    if (newSize < m_size)
+    {
+        throw CStackOverflowError();
+    }
+
     auto newNode = std::make_shared<Item>(std::move(str), m_top);
     m_top = newNode;
-    ++m_size;
+    m_size = newSize;
 }
 
 void CStringStack::Pop()

@@ -3,9 +3,8 @@
 #include <stack>
 int main()
 {
-    std::cout << "Hello World!\n";
-    std::stack<std::string> stack;
-    stack.push("avb");
-    stack.pop();
+	std::stack<int> stac;
+	stac.push(3);
+	std::stack<int> stack(stac);
 }
 

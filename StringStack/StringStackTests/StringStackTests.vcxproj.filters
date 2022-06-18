@@ -24,12 +24,18 @@
     <ClCompile Include="..\StringStack\CStringStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\StringStack\CStackOverflowError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\StringStack\CStackUnderflowError.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\StringStack\CStringStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\StringStack\CStackOverflowError.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
